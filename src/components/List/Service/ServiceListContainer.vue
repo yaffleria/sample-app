@@ -64,7 +64,7 @@
       <!-- Initial Loading Skeleton -->
       <ServiceListSkeleton
         v-if="isLoadingServices && services.length === 0"
-        :count="3"
+        :count="5"
       />
 
       <!-- Services List -->
@@ -82,7 +82,7 @@
         <!-- Loading More Skeleton -->
         <ServiceListSkeleton
           v-if="isLoadingMore"
-          :count="2"
+          :count="3"
         />
 
         <!-- Infinite Scroll Trigger -->

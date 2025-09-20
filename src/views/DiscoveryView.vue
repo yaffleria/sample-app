@@ -29,7 +29,11 @@
     isLoading: isLoadingServices,
   } = useInfiniteQuery({
     queryKey: ['services'],
-    queryFn: ({ pageParam = 1 }) => getServiceList(pageParam as number, 3),
+    queryFn: ({ pageParam = 1 }) => {
+      // 첫 페이지는 10개, 이후 페이지는 5개씩
+      const limit = pageParam === 1 ? 10 : 5
+      return getServiceList(pageParam as number, limit)
+    },
     getNextPageParam: (lastPage: AxiosResponse<PaginatedResponse<ServiceListItem>>) => {
       const pagination = lastPage.data.pagination
       return pagination.hasNextPage ? pagination.page + 1 : undefined
