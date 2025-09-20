@@ -9,7 +9,7 @@
   >
     <!-- Bottom sheet -->
     <div
-      class="relative bg-white rounded-t-2xl shadow-2xl w-full max-w-md mx-4 mb-0"
+      class="relative bg-white rounded-t-2xl shadow-2xl w-full mb-0"
       style="height: 55vh; min-height: 300px"
       @click.stop
     >
