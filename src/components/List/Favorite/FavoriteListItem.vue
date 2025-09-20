@@ -1,16 +1,23 @@
 <script setup lang="ts">
+  import { computed } from 'vue'
   import { useI18n } from 'vue-i18n'
   import type { ServiceListItem } from '@/types/service'
-  import { BookmarkIcon, ExternalLinkIcon } from '@/components/Icon'
+  import { BookmarkIcon } from '@/components/Icon'
   import { FallbackImage } from '@/components/Common'
 
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
 
   interface Props {
     service: ServiceListItem
   }
 
-  defineProps<Props>()
+  const props = defineProps<Props>()
+
+  const localizedDescription = computed(() => {
+    if (!props.service.description) return ''
+    const currentLocale = locale.value as 'ko' | 'en'
+    return props.service.description[currentLocale] || props.service.description.ko || props.service.description.en
+  })
 
   defineEmits<{
     removeFromFavorites: [serviceName: string]
@@ -43,31 +50,23 @@
         v-if="service.description"
         class="text-sm text-gray-500 truncate"
       >
-        {{ service.description }}
+        {{ localizedDescription }}
       </p>
     </div>
 
     <!-- Actions -->
     <div class="flex items-center space-x-2">
-      <!-- Open Service Button -->
-      <button
-        @click="$emit('openService', service)"
-        class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-        :title="t('go_to_dapp')"
-      >
-        <ExternalLinkIcon class="w-4 h-4" />
-      </button>
-
       <!-- Remove from Favorites Button -->
       <button
         @click="$emit('removeFromFavorites', service.name)"
-        class="p-2 rounded-lg transition-colors text-red-600 hover:bg-red-50"
+        class="p-2 rounded-lg transition-colors text-red-600 hover:bg-red-50 flex flex-col items-center"
         :title="t('dapp_favorite_delete')"
       >
         <BookmarkIcon
-          class="w-5 h-5"
+          class="w-5 h-5 mb-1"
           fill="currentColor"
         />
+        <span class="text-xs">{{ t('dapp_favorite_delete') }}</span>
       </button>
     </div>
   </div>

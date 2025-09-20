@@ -1,12 +1,22 @@
 <script setup lang="ts">
+  import { computed } from 'vue'
+  import { useI18n } from 'vue-i18n'
   import type { ServiceListItem } from '@/types/service'
   import { FallbackImage } from '@/components/Common'
+
+  const { locale } = useI18n()
 
   interface Props {
     service: ServiceListItem
   }
 
-  defineProps<Props>()
+  const props = defineProps<Props>()
+
+  const localizedDescription = computed(() => {
+    if (!props.service.description) return ''
+    const currentLocale = locale.value as 'ko' | 'en'
+    return props.service.description[currentLocale] || props.service.description.ko || props.service.description.en
+  })
 
   defineEmits<{
     click: [service: ServiceListItem]
@@ -41,7 +51,7 @@
         v-if="service.description"
         class="text-sm text-gray-500 truncate"
       >
-        {{ service.description.en || service.description.ko }}
+        {{ localizedDescription }}
       </p>
       <p
         v-if="service.supportNetwork"
