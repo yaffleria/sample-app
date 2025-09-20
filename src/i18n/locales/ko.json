@@ -6,5 +6,6 @@
   "go_to_dapp": "서비스 바로가기",
   "button_cancel": "취소",
   "button_confirm": "확인",
-  "end_of_list": "더 이상 불러올 서비스가 없습니다"
+  "end_of_list": "더 이상 불러올 서비스가 없습니다",
+  "no_favorites": "아직 즐겨찾기한 서비스가 없습니다"
 }
