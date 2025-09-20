@@ -1,7 +1,7 @@
-import type { Banner } from '@/types/discovery'
+import type { BannerListItem } from '@/types/banner'
 
 import { httpClient } from '../http'
 
 export default function getBannerList() {
-  return httpClient.get<Banner[]>('/api/banners')
+  return httpClient.get<BannerListItem[]>('/api/banners')
 }

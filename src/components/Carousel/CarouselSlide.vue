@@ -1,13 +1,14 @@
 <script setup lang="ts">
   import { computed } from 'vue'
-  import type { Banner, LocalizedText } from '@/types/discovery'
+  import type { BannerListItem } from '@/types/banner'
+  import type { LocalizedText } from '@/types/common'
   import CarouselImage from './CarouselImage.vue'
   import CarouselButton from './CarouselButton.vue'
   import CarouselSlideIndex from './CarouselSlideIndex.vue'
   import CarouselDescription from './CarouselDescription.vue'
 
   interface Props {
-    banner: Banner
+    banner: BannerListItem
     currentLocale: LocalizedText
     currentSlide: number
     totalSlides: number

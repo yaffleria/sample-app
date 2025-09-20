@@ -1,7 +1,7 @@
-import type { Service } from '@/types/discovery'
+import type { ServiceListItem } from '@/types/service'
 
 import { httpClient } from '../http'
 
 export default function getServiceList() {
-  return httpClient.get<Service[]>('/api/services')
+  return httpClient.get<ServiceListItem[]>('/api/services')
 }

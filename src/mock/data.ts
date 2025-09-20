@@ -1,6 +1,7 @@
-import type { Banner, Service } from '@/types/discovery'
+import type { BannerListItem } from '@/types/banner'
+import type { ServiceListItem } from '@/types/service'
 
-export const mockBanners: Banner[] = [
+export const mockBanners: BannerListItem[] = [
   {
     name: 'Campaign MAPO Airdrop',
     imageUrl: {
@@ -59,7 +60,7 @@ export const mockBanners: Banner[] = [
     },
   },
 ]
-export const mockServices: Service[] = [
+export const mockServices: ServiceListItem[] = [
   {
     id: 's1',
     name: 'MoonPay',
@@ -70,6 +71,7 @@ export const mockServices: Service[] = [
     serviceUrl: 'https://buy.moonpay.com',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_moonpay.png?raw=true',
     supportedLang: ['en'],
+    supportedDevice: ['iphone'],
     isFavorite: false,
   },
   {
