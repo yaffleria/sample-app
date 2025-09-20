@@ -3,3 +3,4 @@ export { default as ServiceListContainer } from './Service/ServiceListContainer.
 export { default as ListHeader } from './ListHeader.vue'
 export { default as ServiceListItem } from './Service/ServiceListItem.vue'
 export { default as FavoriteListItem } from './Favorite/FavoriteListItem.vue'
+export { default as FallbackImage } from './FallbackImage.vue'
