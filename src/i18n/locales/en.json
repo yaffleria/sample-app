@@ -5,5 +5,7 @@
   "dapp_list_title": "List",
   "go_to_dapp": "Go",
   "button_cancel": "Cancel",
-  "button_confirm": "Confirm"
+  "button_confirm": "Confirm",
+  "end_of_list": "No more services to load",
+  "no_favorites": "No favorite services yet"
 }
