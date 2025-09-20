@@ -25,7 +25,7 @@
 
 <template>
   <div
-    class="flex items-center p-3 bg-white hover:shadow-md transition-shadow cursor-pointer"
+    class="flex items-center p-3 bg-white hover:shadow-md transition-shadow cursor-pointer border-b border-gray-200"
     @click="$emit('showDetails', service)"
   >
     <!-- Service Icon -->
@@ -52,12 +52,6 @@
         class="text-sm text-gray-500 truncate"
       >
         {{ localizedDescription }}
-      </p>
-      <p
-        v-if="service.supportNetwork"
-        class="text-xs text-gray-400 mt-1"
-      >
-        {{ service.supportNetwork.join(', ') }}
       </p>
     </div>
   </div>
