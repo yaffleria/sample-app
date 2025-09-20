@@ -1,10 +1,11 @@
 <script setup lang="ts">
-  import { useQuery } from '@tanstack/vue-query'
+  import { useQuery, useInfiniteQuery } from '@tanstack/vue-query'
   import getBannerList from '@/api/helper/getBannerList'
   import getServiceList from '@/api/helper/getServiceList'
   import { computed, watch } from 'vue'
   import type { BannerListItem } from '@/types/banner'
   import type { ServiceListItem } from '@/types/service'
+  import type { PaginatedResponse } from '@/types/api'
   import type { AxiosResponse } from 'axios'
   import CarouselContainer from '@/components/Carousel/CarouselContainer.vue'
   import CarouselSkeleton from '@/components/Carousel/CarouselSkeleton.vue'
@@ -23,24 +24,83 @@
     queryFn: () => getBannerList(),
   })
 
-  const { data: servicesResponse } = useQuery<AxiosResponse<ServiceListItem[]>>({
+  const {
+    data: servicesInfiniteData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading: isLoadingServices,
+  } = useInfiniteQuery({
     queryKey: ['services'],
-    queryFn: () => getServiceList(),
+    queryFn: ({ pageParam = 1 }) => getServiceList(pageParam as number, 3),
+    getNextPageParam: (lastPage: AxiosResponse<PaginatedResponse<ServiceListItem>>) => {
+      const pagination = lastPage.data.pagination
+      return pagination.hasNextPage ? pagination.page + 1 : undefined
+    },
+    initialPageParam: 1,
   })
 
   const bannerData = computed(() => bannerResponse.value?.data || [])
-  const servicesData = computed(() => servicesResponse.value?.data || [])
+
+  const allServices = computed(() => {
+    if (!servicesInfiniteData.value) return []
+    return servicesInfiniteData.value.pages.flatMap(
+      (page: AxiosResponse<PaginatedResponse<ServiceListItem>>) => page.data.data
+    )
+  })
 
   // Watch for services data and update store when available
   watch(
-    servicesData,
+    allServices,
     (newServices) => {
       if (newServices.length > 0) {
-        serviceListStore.setServices(newServices)
+        // Set initial services if store is empty, otherwise append
+        if (serviceListStore.services.length === 0) {
+          serviceListStore.setServices(newServices)
+        } else {
+          // Find new services that aren't already in the store
+          const existingIds = new Set(serviceListStore.services.map((s) => s.id))
+          const newUniqueServices = newServices.filter((s) => !existingIds.has(s.id))
+          if (newUniqueServices.length > 0) {
+            serviceListStore.appendServices(newUniqueServices)
+          }
+        }
+
+        // Update pagination state
+        const lastPage = servicesInfiniteData.value?.pages[servicesInfiniteData.value.pages.length - 1] as
+          | AxiosResponse<PaginatedResponse<ServiceListItem>>
+          | undefined
+        if (lastPage) {
+          serviceListStore.setHasNextPage(lastPage.data.pagination.hasNextPage)
+          serviceListStore.setCurrentPage(lastPage.data.pagination.page)
+        }
       }
     },
     { immediate: true }
   )
+
+  // Update loading state in store
+  watch(
+    isFetchingNextPage,
+    (loading) => {
+      serviceListStore.setIsLoadingMore(loading)
+    },
+    { immediate: true }
+  )
+
+  // Provide fetchMore function to child components
+  const handleFetchMore = () => {
+    console.log('handleFetchMore called', {
+      hasNextPage: hasNextPage.value,
+      isFetchingNextPage: isFetchingNextPage.value,
+    })
+    if (hasNextPage.value && !isFetchingNextPage.value) {
+      console.log('Calling fetchNextPage')
+      fetchNextPage()
+    } else {
+      console.log('Cannot fetch next page')
+    }
+  }
 </script>
 <template>
   <!-- 메인 컨테이너: 100dvh로 전체 높이, 모바일 퍼스트 -->
@@ -72,7 +132,10 @@
 
       <!-- 서비스 리스트 섹션 -->
       <section class="w-full lg:w-2/3 min-w-0">
-        <ServiceListContainer />
+        <ServiceListContainer
+          :fetch-more="handleFetchMore"
+          :is-loading-services="isLoadingServices"
+        />
       </section>
     </div>
   </div>
