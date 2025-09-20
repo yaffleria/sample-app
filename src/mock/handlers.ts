@@ -1,11 +1,15 @@
 import { http, HttpResponse } from 'msw'
-import { mockBanners, mockServices } from '@/mock/data'
+import { mockBanners, mockServices, mockServiceFavorite } from '@/mock/data'
 
 export const handlers = [
   http.get('/api/banners', async () => {
     // Add 5 second delay to test loading states
     await new Promise((resolve) => setTimeout(resolve, 2500))
     return HttpResponse.json(mockBanners)
+  }),
+  http.get('/api/services/favorite', async () => {
+    await new Promise((resolve) => setTimeout(resolve, 2500))
+    return HttpResponse.json(mockServiceFavorite)
   }),
   http.get('/api/services', async ({ request }) => {
     const url = new URL(request.url)

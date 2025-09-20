@@ -1,7 +1,5 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
   import { useI18n } from 'vue-i18n'
-  import { useServiceListStore } from '@/stores/serviceList'
   import { useInfiniteScroll } from '@/utils'
   import ServiceListItem from './ServiceListItem.vue'
   import ServiceListSkeleton from './ServiceListSkeleton.vue'
@@ -9,22 +7,22 @@
   import type { ServiceListItem as ServiceListItemType } from '@/types/service'
 
   interface Props {
+    services: ServiceListItemType[]
+    hasNextPage: boolean
+    isLoadingMore: boolean
     fetchMore?: () => void
     isLoadingServices?: boolean
   }
 
   const props = withDefaults(defineProps<Props>(), {
+    services: () => [],
+    hasNextPage: false,
+    isLoadingMore: false,
     fetchMore: () => {},
     isLoadingServices: false,
   })
 
   const { t } = useI18n()
-
-  const serviceListStore = useServiceListStore()
-
-  const servicesList = computed(() => serviceListStore.servicesList)
-  const isLoadingMore = computed(() => serviceListStore.isLoadingMore)
-  const hasNextPage = computed(() => serviceListStore.hasNextPage)
 
   const handleServiceClick = (service: ServiceListItemType) => {
     // This will be used for future functionality (infinite scroll trigger, etc.)
@@ -34,11 +32,11 @@
   // Set up infinite scroll
   const { target } = useInfiniteScroll(() => {
     console.log('Infinite scroll triggered', {
-      hasNextPage: hasNextPage.value,
-      isLoadingMore: isLoadingMore.value,
+      hasNextPage: props.hasNextPage,
+      isLoadingMore: props.isLoadingMore,
       fetchMoreExists: !!props.fetchMore,
     })
-    if (hasNextPage.value && !isLoadingMore.value && props.fetchMore) {
+    if (props.hasNextPage && !props.isLoadingMore && props.fetchMore) {
       console.log('Calling fetchMore')
       props.fetchMore()
     } else {
@@ -52,14 +50,14 @@
     <!-- Header -->
     <ListHeader
       :title="t('dapp_list_title')"
-      :count="servicesList.length"
+      :count="services.length"
     />
 
     <!-- Content -->
     <div class="p-4">
       <!-- Initial Loading Skeleton -->
       <ServiceListSkeleton
-        v-if="isLoadingServices && servicesList.length === 0"
+        v-if="isLoadingServices && services.length === 0"
         :count="3"
       />
 
@@ -69,7 +67,7 @@
         class="space-y-3"
       >
         <ServiceListItem
-          v-for="service in servicesList"
+          v-for="service in services"
           :key="service.name"
           :service="service"
           @click="handleServiceClick"
@@ -90,7 +88,7 @@
 
         <!-- End of List Message -->
         <div
-          v-if="!hasNextPage && servicesList.length > 0"
+          v-if="!hasNextPage && services.length > 0"
           class="text-center py-4 text-gray-500 text-sm"
         >
           {{ t('end_of_list') || 'No more services to load' }}

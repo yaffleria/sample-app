@@ -60,6 +60,41 @@ export const mockBanners: BannerListItem[] = [
     },
   },
 ]
+export const mockServiceFavorite: ServiceListItem[] = [
+  {
+    id: 's5',
+    name: 'XDSea',
+    description: {
+      en: "XDSea is the world's first and largest peer-to-peer decentralized marketplace for buying and selling NFTs built on the XDC Network.",
+      ko: 'XDSea는 XDC 네트워크에 구축된 NFT를 사고 파는 세계 최초이자 최대 규모의 P2P 분산형 시장입니다.',
+    },
+    serviceUrl: '',
+    iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_xdsea.png?raw=true',
+    supportNetwork: ['XDC Network'],
+  },
+  {
+    id: 's6',
+    name: 'Compound',
+    description: {
+      en: "Compound is Ethereum's algorithmic money market protocol that allows users to earn interest or borrow assets through collateral. Anyone can supply assets to Compound's liquidity pool and earn continuous compound interest immediately.",
+      ko: 'Compound는 담보를 통해 이자를 얻거나 자산을 빌릴 수 있는 이더리움 기반의 머니 마켓 프로토콜입니다. 컴파운드의 유동성 풀에 자산을 공급하면 복리이자를 얻을 수 있습니다.',
+    },
+    serviceUrl: 'https://app.compound.finance/',
+    iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_compound.png?raw=true',
+    supportNetwork: ['Ethereum'],
+  },
+  {
+    id: 's7',
+    name: 'PoolTogether',
+    description: {
+      en: 'PoolTogether is an Ethereum based application that makes saving money as fun as a game. You join a pool by getting a “savings ticket”. Each Savings Ticket gives you a chance to win a prize, but even if you don’t win, you keep all your money!',
+      ko: "PoolTogether는 저축을 재미있게 하는 이더리움 기반의 서비스입니다. 자산을 예치하면 “저축 티켓“을 받아 '풀'에 참여합니다. 각 저축 티켓은 풀에서 발생한 이자를 받을 수 있는 기회를 제공하지만, 당첨되지 않더라도 손실이 없습니다.",
+    },
+    serviceUrl: 'https://app.pooltogether.com/',
+    iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_pooltogether.png?raw=true',
+    supportNetwork: ['Ethereum'],
+  },
+]
 export const mockServices: ServiceListItem[] = [
   {
     id: 's1',
@@ -72,7 +107,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_moonpay.png?raw=true',
     supportedLang: ['en'],
     supportedDevice: ['iphone'],
-    isFavorite: false,
   },
   {
     id: 's2',
@@ -84,7 +118,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://ftsoportal.com',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Songbird', 'Flare'],
-    isFavorite: false,
   },
   {
     id: 's3',
@@ -97,7 +130,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Astar'],
     supportEnv: ['dev', 'stage'],
-    isFavorite: false,
   },
   {
     id: 's4',
@@ -109,7 +141,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.1inch.io',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_1inch.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's5',
@@ -121,7 +152,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: '',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_xdsea.png?raw=true',
     supportNetwork: ['XDC Network'],
-    isFavorite: false,
   },
   {
     id: 's6',
@@ -133,7 +163,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.compound.finance/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_compound.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's7',
@@ -145,7 +174,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.pooltogether.com/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_pooltogether.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's8',
@@ -157,7 +185,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://opensea.io/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_opensea.png?raw=true',
     supportNetwork: ['Ethereum', 'Polygon'],
-    isFavorite: false,
   },
   {
     id: 's9',
@@ -170,7 +197,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_bluewhale.png?raw=true',
     supportNetwork: ['Kaia'],
     supportedLang: ['ko'],
-    isFavorite: false,
   },
   {
     id: 's10',
@@ -183,7 +209,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_moonpay.png?raw=true',
     supportedLang: ['en'],
     supportedDevice: ['iphone'],
-    isFavorite: true,
   },
   {
     id: 's11',
@@ -195,7 +220,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://ftsoportal.com',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Songbird', 'Flare'],
-    isFavorite: false,
   },
   {
     id: 's12',
@@ -208,7 +232,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Astar'],
     supportEnv: ['dev', 'stage'],
-    isFavorite: false,
   },
   {
     id: 's13',
@@ -220,7 +243,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.1inch.io',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_1inch.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's14',
@@ -232,7 +254,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: '',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_xdsea.png?raw=true',
     supportNetwork: ['XDC Network'],
-    isFavorite: false,
   },
   {
     id: 's15',
@@ -244,7 +265,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.compound.finance/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_compound.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's16',
@@ -256,7 +276,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.pooltogether.com/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_pooltogether.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's17',
@@ -268,7 +287,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://opensea.io/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_opensea.png?raw=true',
     supportNetwork: ['Ethereum', 'Polygon'],
-    isFavorite: false,
   },
   {
     id: 's18',
@@ -281,7 +299,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_bluewhale.png?raw=true',
     supportNetwork: ['Kaia'],
     supportedLang: ['ko'],
-    isFavorite: false,
   },
   {
     id: 's19',
@@ -294,7 +311,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_moonpay.png?raw=true',
     supportedLang: ['en'],
     supportedDevice: ['iphone'],
-    isFavorite: false,
   },
   {
     id: 's20',
@@ -306,7 +322,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://ftsoportal.com',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Songbird', 'Flare'],
-    isFavorite: false,
   },
   {
     id: 's21',
@@ -319,7 +334,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Astar'],
     supportEnv: ['dev', 'stage'],
-    isFavorite: false,
   },
   {
     id: 's22',
@@ -331,7 +345,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.1inch.io',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_1inch.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's23',
@@ -343,7 +356,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: '',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_xdsea.png?raw=true',
     supportNetwork: ['XDC Network'],
-    isFavorite: false,
   },
   {
     id: 's24',
@@ -355,7 +367,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.compound.finance/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_compound.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's25',
@@ -367,7 +378,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.pooltogether.com/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_pooltogether.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's26',
@@ -379,7 +389,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://opensea.io/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_opensea.png?raw=true',
     supportNetwork: ['Ethereum', 'Polygon'],
-    isFavorite: false,
   },
   {
     id: 's27',
@@ -392,7 +401,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_bluewhale.png?raw=true',
     supportNetwork: ['Kaia'],
     supportedLang: ['ko'],
-    isFavorite: false,
   },
   {
     id: 's28',
@@ -405,7 +413,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_moonpay.png?raw=true',
     supportedLang: ['en'],
     supportedDevice: ['iphone'],
-    isFavorite: false,
   },
   {
     id: 's29',
@@ -417,7 +424,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://ftsoportal.com',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Songbird', 'Flare'],
-    isFavorite: false,
   },
   {
     id: 's30',
@@ -430,7 +436,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Astar'],
     supportEnv: ['dev', 'stage'],
-    isFavorite: false,
   },
   {
     id: 's31',
@@ -442,7 +447,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.1inch.io',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_1inch.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's32',
@@ -454,7 +458,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: '',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_xdsea.png?raw=true',
     supportNetwork: ['XDC Network'],
-    isFavorite: false,
   },
   {
     id: 's33',
@@ -466,7 +469,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.compound.finance/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_compound.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's34',
@@ -478,7 +480,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.pooltogether.com/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_pooltogether.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's35',
@@ -490,7 +491,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://opensea.io/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_opensea.png?raw=true',
     supportNetwork: ['Ethereum', 'Polygon'],
-    isFavorite: false,
   },
   {
     id: 's36',
@@ -503,7 +503,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_bluewhale.png?raw=true',
     supportNetwork: ['Kaia'],
     supportedLang: ['ko'],
-    isFavorite: false,
   },
   {
     id: 's37',
@@ -516,7 +515,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_moonpay.png?raw=true',
     supportedLang: ['en'],
     supportedDevice: ['iphone'],
-    isFavorite: false,
   },
   {
     id: 's38',
@@ -528,7 +526,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://ftsoportal.com',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Songbird', 'Flare'],
-    isFavorite: false,
   },
   {
     id: 's39',
@@ -541,7 +538,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Astar'],
     supportEnv: ['dev', 'stage'],
-    isFavorite: false,
   },
   {
     id: 's40',
@@ -553,7 +549,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.1inch.io',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_1inch.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's41',
@@ -565,7 +560,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: '',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_xdsea.png?raw=true',
     supportNetwork: ['XDC Network'],
-    isFavorite: false,
   },
   {
     id: 's42',
@@ -577,7 +571,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.compound.finance/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_compound.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's43',
@@ -589,7 +582,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.pooltogether.com/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_pooltogether.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's44',
@@ -601,7 +593,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://opensea.io/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_opensea.png?raw=true',
     supportNetwork: ['Ethereum', 'Polygon'],
-    isFavorite: false,
   },
   {
     id: 's45',
@@ -614,7 +605,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_bluewhale.png?raw=true',
     supportNetwork: ['Kaia'],
     supportedLang: ['ko'],
-    isFavorite: false,
   },
   {
     id: 's46',
@@ -627,7 +617,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_moonpay.png?raw=true',
     supportedLang: ['en'],
     supportedDevice: ['iphone'],
-    isFavorite: false,
   },
   {
     id: 's47',
@@ -639,7 +628,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://ftsoportal.com',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Songbird', 'Flare'],
-    isFavorite: false,
   },
   {
     id: 's48',
@@ -652,7 +640,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Astar'],
     supportEnv: ['dev', 'stage'],
-    isFavorite: false,
   },
   {
     id: 's49',
@@ -664,7 +651,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.1inch.io',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_1inch.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's50',
@@ -676,7 +662,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: '',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_xdsea.png?raw=true',
     supportNetwork: ['XDC Network'],
-    isFavorite: false,
   },
   {
     id: 's51',
@@ -688,7 +673,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.compound.finance/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_compound.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's52',
@@ -700,7 +684,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.pooltogether.com/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_pooltogether.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's53',
@@ -712,7 +695,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://opensea.io/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_opensea.png?raw=true',
     supportNetwork: ['Ethereum', 'Polygon'],
-    isFavorite: false,
   },
   {
     id: 's54',
@@ -725,7 +707,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_bluewhale.png?raw=true',
     supportNetwork: ['Kaia'],
     supportedLang: ['ko'],
-    isFavorite: false,
   },
   {
     id: 's55',
@@ -738,7 +719,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_moonpay.png?raw=true',
     supportedLang: ['en'],
     supportedDevice: ['iphone'],
-    isFavorite: false,
   },
   {
     id: 's56',
@@ -750,7 +730,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://ftsoportal.com',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Songbird', 'Flare'],
-    isFavorite: false,
   },
   {
     id: 's57',
@@ -763,7 +742,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Astar'],
     supportEnv: ['dev', 'stage'],
-    isFavorite: false,
   },
   {
     id: 's58',
@@ -775,7 +753,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.1inch.io',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_1inch.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's59',
@@ -787,7 +764,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: '',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_xdsea.png?raw=true',
     supportNetwork: ['XDC Network'],
-    isFavorite: false,
   },
   {
     id: 's60',
@@ -799,7 +775,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.compound.finance/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_compound.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's61',
@@ -811,7 +786,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.pooltogether.com/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_pooltogether.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's62',
@@ -823,7 +797,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://opensea.io/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_opensea.png?raw=true',
     supportNetwork: ['Ethereum', 'Polygon'],
-    isFavorite: false,
   },
   {
     id: 's63',
@@ -836,7 +809,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_bluewhale.png?raw=true',
     supportNetwork: ['Kaia'],
     supportedLang: ['ko'],
-    isFavorite: false,
   },
   {
     id: 's64',
@@ -849,7 +821,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_moonpay.png?raw=true',
     supportedLang: ['en'],
     supportedDevice: ['iphone'],
-    isFavorite: false,
   },
   {
     id: 's65',
@@ -861,7 +832,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://ftsoportal.com',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Songbird', 'Flare'],
-    isFavorite: false,
   },
   {
     id: 's66',
@@ -874,7 +844,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Astar'],
     supportEnv: ['dev', 'stage'],
-    isFavorite: false,
   },
   {
     id: 's67',
@@ -886,7 +855,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.1inch.io',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_1inch.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's68',
@@ -898,7 +866,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: '',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_xdsea.png?raw=true',
     supportNetwork: ['XDC Network'],
-    isFavorite: false,
   },
   {
     id: 's69',
@@ -910,7 +877,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.compound.finance/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_compound.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's70',
@@ -922,7 +888,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.pooltogether.com/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_pooltogether.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's71',
@@ -934,7 +899,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://opensea.io/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_opensea.png?raw=true',
     supportNetwork: ['Ethereum', 'Polygon'],
-    isFavorite: false,
   },
   {
     id: 's72',
@@ -947,7 +911,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_bluewhale.png?raw=true',
     supportNetwork: ['Kaia'],
     supportedLang: ['ko'],
-    isFavorite: false,
   },
   {
     id: 's73',
@@ -960,7 +923,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_moonpay.png?raw=true',
     supportedLang: ['en'],
     supportedDevice: ['iphone'],
-    isFavorite: false,
   },
   {
     id: 's74',
@@ -972,7 +934,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://ftsoportal.com',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Songbird', 'Flare'],
-    isFavorite: false,
   },
   {
     id: 's75',
@@ -985,7 +946,6 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_ftso.png?raw=true',
     supportNetwork: ['Astar'],
     supportEnv: ['dev', 'stage'],
-    isFavorite: false,
   },
   {
     id: 's76',
@@ -997,7 +957,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.1inch.io',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_1inch.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's77',
@@ -1009,7 +968,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: '',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_xdsea.png?raw=true',
     supportNetwork: ['XDC Network'],
-    isFavorite: false,
   },
   {
     id: 's78',
@@ -1021,7 +979,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.compound.finance/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_compound.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's79',
@@ -1033,7 +990,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://app.pooltogether.com/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_pooltogether.png?raw=true',
     supportNetwork: ['Ethereum'],
-    isFavorite: false,
   },
   {
     id: 's80',
@@ -1045,7 +1001,6 @@ export const mockServices: ServiceListItem[] = [
     serviceUrl: 'https://opensea.io/',
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_opensea.png?raw=true',
     supportNetwork: ['Ethereum', 'Polygon'],
-    isFavorite: false,
   },
   {
     id: 's81',
@@ -1058,6 +1013,5 @@ export const mockServices: ServiceListItem[] = [
     iconUrl: 'https://github.com/KyungeunKim/iotrust-frontend-homework/blob/main/images/icon_bluewhale.png?raw=true',
     supportNetwork: ['Kaia'],
     supportedLang: ['ko'],
-    isFavorite: false,
   },
 ]

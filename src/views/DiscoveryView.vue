@@ -2,7 +2,7 @@
   import { useQuery, useInfiniteQuery } from '@tanstack/vue-query'
   import getBannerList from '@/api/helper/getBannerList'
   import getServiceList from '@/api/helper/getServiceList'
-  import { computed, watch } from 'vue'
+  import { computed } from 'vue'
   import type { BannerListItem } from '@/types/banner'
   import type { ServiceListItem } from '@/types/service'
   import type { PaginatedResponse } from '@/types/api'
@@ -10,9 +10,6 @@
   import CarouselContainer from '@/components/Carousel/CarouselContainer.vue'
   import CarouselSkeleton from '@/components/Carousel/CarouselSkeleton.vue'
   import { FavoriteListContainer, ServiceListContainer } from '@/components/List'
-  import { useServiceListStore } from '@/stores/serviceList'
-
-  const serviceListStore = useServiceListStore()
 
   const {
     isLoading: isLoadingBannerList,
@@ -48,45 +45,6 @@
       (page: AxiosResponse<PaginatedResponse<ServiceListItem>>) => page.data.data
     )
   })
-
-  // Watch for services data and update store when available
-  watch(
-    allServices,
-    (newServices) => {
-      if (newServices.length > 0) {
-        // Set initial services if store is empty, otherwise append
-        if (serviceListStore.services.length === 0) {
-          serviceListStore.setServices(newServices)
-        } else {
-          // Find new services that aren't already in the store
-          const existingIds = new Set(serviceListStore.services.map((s) => s.id))
-          const newUniqueServices = newServices.filter((s) => !existingIds.has(s.id))
-          if (newUniqueServices.length > 0) {
-            serviceListStore.appendServices(newUniqueServices)
-          }
-        }
-
-        // Update pagination state
-        const lastPage = servicesInfiniteData.value?.pages[servicesInfiniteData.value.pages.length - 1] as
-          | AxiosResponse<PaginatedResponse<ServiceListItem>>
-          | undefined
-        if (lastPage) {
-          serviceListStore.setHasNextPage(lastPage.data.pagination.hasNextPage)
-          serviceListStore.setCurrentPage(lastPage.data.pagination.page)
-        }
-      }
-    },
-    { immediate: true }
-  )
-
-  // Update loading state in store
-  watch(
-    isFetchingNextPage,
-    (loading) => {
-      serviceListStore.setIsLoadingMore(loading)
-    },
-    { immediate: true }
-  )
 
   // Provide fetchMore function to child components
   const handleFetchMore = () => {
@@ -133,6 +91,9 @@
       <!-- 서비스 리스트 섹션 -->
       <section class="w-full lg:w-2/3 min-w-0">
         <ServiceListContainer
+          :services="allServices"
+          :has-next-page="hasNextPage"
+          :is-loading-more="isFetchingNextPage"
           :fetch-more="handleFetchMore"
           :is-loading-services="isLoadingServices"
         />
