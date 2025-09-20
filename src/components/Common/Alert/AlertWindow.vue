@@ -3,9 +3,11 @@
     v-if="isVisible"
     class="fixed inset-0 z-50 flex items-center justify-center"
     @click="handleBackdropClick"
+    @touchmove.prevent
+    @wheel.prevent
   >
     <!-- Background overlay with shadow -->
-    <div class="absolute inset-0 bg-opacity-10 backdrop-blur-sm"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-10 backdrop-blur-sm"></div>
 
     <!-- Alert window -->
     <div
@@ -49,6 +51,7 @@
 
 <script setup lang="ts">
   import { useI18n } from 'vue-i18n'
+  import { watch, onUnmounted } from 'vue'
 
   interface Props {
     isVisible: boolean
@@ -64,7 +67,7 @@
     (e: 'close'): void
   }
 
-  withDefaults(defineProps<Props>(), {
+  const props = withDefaults(defineProps<Props>(), {
     isVisible: false,
     title: '',
     description: '',
@@ -73,6 +76,47 @@
   })
   const emit = defineEmits<Emits>()
   const { t } = useI18n()
+
+  // Body scroll management
+  let originalOverflow = ''
+  let originalPaddingRight = ''
+
+  const preventBodyScroll = () => {
+    const body = document.body
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth
+
+    originalOverflow = body.style.overflow
+    originalPaddingRight = body.style.paddingRight
+
+    body.style.overflow = 'hidden'
+    body.style.paddingRight = `${scrollBarWidth}px`
+  }
+
+  const restoreBodyScroll = () => {
+    const body = document.body
+    body.style.overflow = originalOverflow
+    body.style.paddingRight = originalPaddingRight
+  }
+
+  // Watch for visibility changes
+  watch(
+    () => props.isVisible,
+    (newVisible) => {
+      if (newVisible) {
+        preventBodyScroll()
+      } else {
+        restoreBodyScroll()
+      }
+    },
+    { immediate: true }
+  )
+
+  // Cleanup on unmount
+  onUnmounted(() => {
+    if (props.isVisible) {
+      restoreBodyScroll()
+    }
+  })
 
   const handleCancel = () => {
     emit('cancel')

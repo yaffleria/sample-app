@@ -3,6 +3,8 @@
     v-if="isVisible && service"
     class="fixed inset-0 z-50 flex items-end justify-center"
     @click="handleBackdropClick"
+    @touchmove.prevent
+    @wheel.prevent
   >
     <!-- Background overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-10 backdrop-blur-sm"></div>
@@ -79,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue'
+  import { computed, watch, onUnmounted } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { FallbackImage } from '@/components/List'
   import type { ServiceListItem } from '@/types/service'
@@ -101,6 +103,47 @@
 
   const emit = defineEmits<Emits>()
   const { locale } = useI18n()
+
+  // Body scroll management
+  let originalOverflow = ''
+  let originalPaddingRight = ''
+
+  const preventBodyScroll = () => {
+    const body = document.body
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth
+
+    originalOverflow = body.style.overflow
+    originalPaddingRight = body.style.paddingRight
+
+    body.style.overflow = 'hidden'
+    body.style.paddingRight = `${scrollBarWidth}px`
+  }
+
+  const restoreBodyScroll = () => {
+    const body = document.body
+    body.style.overflow = originalOverflow
+    body.style.paddingRight = originalPaddingRight
+  }
+
+  // Watch for visibility changes
+  watch(
+    () => props.isVisible,
+    (newVisible) => {
+      if (newVisible) {
+        preventBodyScroll()
+      } else {
+        restoreBodyScroll()
+      }
+    },
+    { immediate: true }
+  )
+
+  // Cleanup on unmount
+  onUnmounted(() => {
+    if (props.isVisible) {
+      restoreBodyScroll()
+    }
+  })
 
   const localizedDescription = computed(() => {
     if (!props.service?.description) return ''
