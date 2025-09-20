@@ -10,10 +10,10 @@
         @input="handleSearchInput"
         @keyup.enter="handleSearchSubmit"
       />
-      
+
       <!-- Search Icon -->
       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <SearchIcon class="h-5 w-5 text-gray-400" />
+        <SearchGlassIcon class="h-5 w-5 text-gray-400" />
       </div>
 
       <!-- Clear Button -->
@@ -22,7 +22,7 @@
         @click="handleClear"
         class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
       >
-        <ClearIcon class="h-5 w-5" />
+        <SearchClearIcon class="h-5 w-5" />
       </button>
     </div>
 
@@ -44,73 +44,73 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { SearchIcon, ClearIcon } from '@/components/Icon'
+  import { ref, watch } from 'vue'
+  import { useI18n } from 'vue-i18n'
+  import { SearchGlassIcon, SearchClearIcon } from '@/components/Icon'
 
-interface Props {
-  modelValue: string
-  placeholder?: string
-  suggestions?: string[]
-  showSuggestions?: boolean
-  debounceMs?: number
-}
-
-interface Emits {
-  (e: 'update:modelValue', value: string): void
-  (e: 'search', value: string): void
-  (e: 'clear'): void
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  modelValue: '',
-  placeholder: '',
-  suggestions: () => [],
-  showSuggestions: false,
-  debounceMs: 300,
-})
-
-const emit = defineEmits<Emits>()
-const { t } = useI18n()
-
-const searchQuery = ref(props.modelValue)
-let debounceTimeout: number
-
-// Watch for external changes to modelValue
-watch(
-  () => props.modelValue,
-  (newValue) => {
-    searchQuery.value = newValue
+  interface Props {
+    modelValue: string
+    placeholder?: string
+    suggestions?: string[]
+    showSuggestions?: boolean
+    debounceMs?: number
   }
-)
 
-// Watch for search query changes with debounce
-watch(searchQuery, (newValue) => {
-  clearTimeout(debounceTimeout)
-  debounceTimeout = setTimeout(() => {
-    emit('update:modelValue', newValue)
-    emit('search', newValue)
-  }, props.debounceMs)
-})
+  interface Emits {
+    (e: 'update:modelValue', value: string): void
+    (e: 'search', value: string): void
+    (e: 'clear'): void
+  }
 
-const handleSearchInput = () => {
-  // Input is handled by v-model and watchers
-}
+  const props = withDefaults(defineProps<Props>(), {
+    modelValue: '',
+    placeholder: '',
+    suggestions: () => [],
+    showSuggestions: false,
+    debounceMs: 300,
+  })
 
-const handleSearchSubmit = () => {
-  clearTimeout(debounceTimeout)
-  emit('search', searchQuery.value)
-}
+  const emit = defineEmits<Emits>()
+  const { t } = useI18n()
 
-const handleClear = () => {
-  clearTimeout(debounceTimeout)
-  searchQuery.value = ''
-  emit('clear')
-}
+  const searchQuery = ref(props.modelValue)
+  let debounceTimeout: number
 
-const handleSuggestionClick = (suggestion: string) => {
-  clearTimeout(debounceTimeout)
-  searchQuery.value = suggestion
-  emit('search', suggestion)
-}
+  // Watch for external changes to modelValue
+  watch(
+    () => props.modelValue,
+    (newValue) => {
+      searchQuery.value = newValue
+    }
+  )
+
+  // Watch for search query changes with debounce
+  watch(searchQuery, (newValue) => {
+    clearTimeout(debounceTimeout)
+    debounceTimeout = setTimeout(() => {
+      emit('update:modelValue', newValue)
+      emit('search', newValue)
+    }, props.debounceMs)
+  })
+
+  const handleSearchInput = () => {
+    // Input is handled by v-model and watchers
+  }
+
+  const handleSearchSubmit = () => {
+    clearTimeout(debounceTimeout)
+    emit('search', searchQuery.value)
+  }
+
+  const handleClear = () => {
+    clearTimeout(debounceTimeout)
+    searchQuery.value = ''
+    emit('clear')
+  }
+
+  const handleSuggestionClick = (suggestion: string) => {
+    clearTimeout(debounceTimeout)
+    searchQuery.value = suggestion
+    emit('search', suggestion)
+  }
 </script>
