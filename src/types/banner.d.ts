@@ -1,10 +1,6 @@
-export type LocalizedText = 'en' | 'ko'
+import type { LocalizedText } from './common'
 
-export interface ApiResponse {
-  banners: Banner[]
-}
-
-export interface Banner {
+export interface BannerListItem {
   name: string
   imageUrl: {
     [key in LocalizedText]: string

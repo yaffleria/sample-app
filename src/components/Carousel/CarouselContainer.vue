@@ -2,13 +2,14 @@
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import { Autoplay } from 'swiper/modules'
   import 'swiper/css'
-  import type { Banner, LocalizedText } from '@/types/discovery'
+  import type { BannerListItem } from '@/types/banner'
+  import type { LocalizedText } from '@/types/common'
   import { useI18n } from 'vue-i18n'
   import { computed, ref } from 'vue'
   import CarouselSlide from './CarouselSlide.vue'
 
   const props = defineProps<{
-    banners: Banner[]
+    banners: BannerListItem[]
   }>()
 
   const { locale } = useI18n()

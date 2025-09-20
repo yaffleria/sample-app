@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import CarouselContainer from '../CarouselContainer.vue'
-import type { Banner } from '@/types/discovery'
+import type { BannerListItem } from '@/types/banner'
 
 // Mock Swiper components
 vi.mock('swiper/vue', () => ({
@@ -40,7 +40,7 @@ vi.mock('../CarouselSlide.vue', () => ({
 }))
 
 describe('CarouselContainer', () => {
-  const mockBanners: Banner[] = [
+  const mockBanners: BannerListItem[] = [
     {
       name: 'Banner 1',
       imageUrl: { en: 'image1-en.jpg', ko: 'image1-ko.jpg' },

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import CarouselSlide from '../CarouselSlide.vue'
-import type { Banner } from '@/types/discovery'
+import type { BannerListItem } from '@/types/banner'
 
 // Mock the sub-components
 vi.mock('../CarouselImage.vue', () => ({
@@ -37,7 +37,7 @@ vi.mock('../CarouselDescription.vue', () => ({
 }))
 
 describe('CarouselSlide', () => {
-  const mockBanner: Banner = {
+  const mockBanner: BannerListItem = {
     name: 'Test Banner',
     imageUrl: {
       en: 'https://example.com/image-en.jpg',
@@ -125,7 +125,7 @@ describe('CarouselSlide', () => {
   })
 
   it('makes image clickable when button text is empty', () => {
-    const bannerWithoutButton: Banner = {
+    const bannerWithoutButton: BannerListItem = {
       ...mockBanner,
       ctaButtonText: {
         en: '',
@@ -184,7 +184,7 @@ describe('CarouselSlide', () => {
       props: defaultProps,
     })
 
-    const newBanner: Banner = {
+    const newBanner: BannerListItem = {
       ...mockBanner,
       ctaButtonText: {
         en: 'New Button Text',
