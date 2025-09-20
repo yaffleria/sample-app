@@ -84,11 +84,9 @@
         <!-- Infinite Scroll Trigger -->
         <div
           ref="target"
-          class="h-10 bg-blue-50 border border-blue-200 rounded text-center text-sm text-blue-600 flex items-center justify-center"
+          class="h-4 opacity-0"
           v-if="hasNextPage && !isLoadingMore"
-        >
-          Scroll trigger zone
-        </div>
+        ></div>
 
         <!-- End of List Message -->
         <div

@@ -4,7 +4,7 @@ import { mockBanners, mockServices } from '@/mock/data'
 export const handlers = [
   http.get('/api/banners', async () => {
     // Add 5 second delay to test loading states
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+    await new Promise((resolve) => setTimeout(resolve, 2500))
     return HttpResponse.json(mockBanners)
   }),
   http.get('/api/services', async ({ request }) => {
@@ -13,7 +13,7 @@ export const handlers = [
     const limit = parseInt(url.searchParams.get('limit') || '3')
 
     // Add 3 second delay to test loading states
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+    await new Promise((resolve) => setTimeout(resolve, 1000))
 
     const startIndex = (page - 1) * limit
     const endIndex = startIndex + limit
