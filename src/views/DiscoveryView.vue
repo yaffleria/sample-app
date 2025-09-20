@@ -10,6 +10,7 @@
   import CarouselContainer from '@/components/Carousel/CarouselContainer.vue'
   import CarouselSkeleton from '@/components/Carousel/CarouselSkeleton.vue'
   import { FavoriteListContainer, ServiceListContainer } from '@/components/List'
+  import { filterSupportedServices } from '@/utils'
 
   const {
     isLoading: isLoadingBannerList,
@@ -43,11 +44,13 @@
 
   const bannerData = computed(() => bannerResponse.value?.data || [])
 
+  // 모든 서비스를 가져온 후 지원되는 서비스만 필터링
   const allServices = computed(() => {
     if (!servicesInfiniteData.value) return []
-    return servicesInfiniteData.value.pages.flatMap(
+    const allRawServices = servicesInfiniteData.value.pages.flatMap(
       (page: AxiosResponse<PaginatedResponse<ServiceListItem>>) => page.data.data
     )
+    return filterSupportedServices(allRawServices)
   })
 
   // Provide fetchMore function to child components
