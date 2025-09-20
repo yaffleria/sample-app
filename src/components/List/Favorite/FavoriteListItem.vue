@@ -5,7 +5,7 @@
   import { BookmarkIcon } from '@/components/Icon'
   import { FallbackImage } from '@/components/List'
 
-  const { t, locale } = useI18n()
+  const { t } = useI18n()
 
   interface Props {
     service: ServiceListItem
@@ -13,10 +13,8 @@
 
   const props = defineProps<Props>()
 
-  const localizedDescription = computed(() => {
-    if (!props.service.description) return ''
-    const currentLocale = locale.value as 'ko' | 'en'
-    return props.service.description[currentLocale] || props.service.description.ko || props.service.description.en
+  const serviceUrl = computed(() => {
+    return props.service.serviceUrl || '#'
   })
 
   defineEmits<{
@@ -27,7 +25,7 @@
 </script>
 
 <template>
-  <div class="flex items-center p-3 bg-white hover:shadow-md transition-shadow">
+  <div class="flex items-center p-3 bg-white hover:shadow-md transition-shadow border-b border-gray-200">
     <!-- Clickable Service Content -->
     <div
       class="flex items-center flex-1 min-w-0 cursor-pointer hover:bg-gray-50 rounded-lg p-2 -m-2 mr-2"
@@ -53,10 +51,10 @@
       <div class="flex-1 min-w-0">
         <h3 class="font-medium text-gray-900 truncate">{{ service.name }}</h3>
         <p
-          v-if="service.description"
+          v-if="serviceUrl && serviceUrl !== '#'"
           class="text-sm text-gray-500 truncate"
         >
-          {{ localizedDescription }}
+          {{ serviceUrl }}
         </p>
       </div>
     </div>

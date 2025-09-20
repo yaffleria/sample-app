@@ -1,11 +1,9 @@
 <script setup lang="ts">
   import { useI18n } from 'vue-i18n'
   import { computed, ref } from 'vue'
-  import { useInfiniteScroll } from '@/utils'
   import { useBottomSheet } from '@/composables/useBottomSheet'
   import { filterServicesBySearch } from '@/utils/serviceFilter'
-  import ServiceListItem from './ServiceListItem.vue'
-  import ServiceListSkeleton from './ServiceListSkeleton.vue'
+  import VirtualServiceList from './VirtualServiceList.vue'
   import ListHeader from '../ListHeader.vue'
   import { SearchBar } from '@/components/Search'
   import type { ServiceListItem as ServiceListItemType } from '@/types/service'
@@ -53,24 +51,12 @@
     searchQuery.value = ''
   }
 
-  // Set up infinite scroll
-  const { target } = useInfiniteScroll(() => {
-    console.log('Infinite scroll triggered', {
-      hasNextPage: props.hasNextPage,
-      isLoadingMore: props.isLoadingMore,
-      fetchMoreExists: !!props.fetchMore,
-    })
-    if (props.hasNextPage && !props.isLoadingMore && props.fetchMore) {
-      console.log('Calling fetchMore')
-      props.fetchMore()
-    } else {
-      console.log('Conditions not met for fetchMore')
-    }
-  }, 200)
+  // When searching, disable infinite scroll and show filtered results
+  const shouldUseVirtualList = computed(() => !searchQuery.value)
 </script>
 
 <template>
-  <div class="bg-white flex-1">
+  <div class="bg-white flex-1 flex flex-col">
     <!-- Header -->
     <ListHeader
       :title="t('dapp_list_title')"
@@ -78,9 +64,9 @@
     />
 
     <!-- Content -->
-    <div class="p-4">
+    <div class="p-4 flex flex-col flex-1 min-h-0">
       <!-- Search Bar -->
-      <div class="mb-4">
+      <div class="mb-4 flex-shrink-0">
         <SearchBar
           v-model="searchQuery"
           :placeholder="t('search_services_placeholder')"
@@ -89,16 +75,22 @@
         />
       </div>
 
-      <!-- Initial Loading Skeleton -->
-      <ServiceListSkeleton
-        v-if="isLoadingServices && services.length === 0"
-        :count="5"
+      <!-- Virtual List (when not searching) -->
+      <VirtualServiceList
+        v-if="shouldUseVirtualList"
+        :services="props.services"
+        :has-next-page="props.hasNextPage"
+        :is-loading-more="props.isLoadingMore"
+        :fetch-more="props.fetchMore"
+        :is-loading-services="props.isLoadingServices"
+        @show-details="handleShowDetails"
+        class="flex-1 min-h-0"
       />
 
-      <!-- Services List -->
+      <!-- Regular List (when searching) -->
       <div
         v-else
-        class="space-y-3"
+        class="space-y-3 flex-1 overflow-y-auto min-h-0"
       >
         <!-- No results message when searching -->
         <div
@@ -110,32 +102,38 @@
         </div>
 
         <!-- Filtered Services -->
-        <ServiceListItem
+        <div
           v-for="service in filteredServices"
           :key="service.id"
-          :service="service"
-          @show-details="handleShowDetails"
-        />
-
-        <!-- Loading More Skeleton (only show when not searching) -->
-        <ServiceListSkeleton
-          v-if="isLoadingMore && !searchQuery"
-          :count="3"
-        />
-
-        <!-- Infinite Scroll Trigger (only when not searching) -->
-        <div
-          ref="target"
-          class="h-4 opacity-0"
-          v-if="hasNextPage && !isLoadingMore && !searchQuery"
-        ></div>
-
-        <!-- End of List Message (only when not searching) -->
-        <div
-          v-if="!hasNextPage && filteredServices.length > 0 && !searchQuery"
-          class="text-center py-4 text-gray-500 text-sm"
+          class="flex items-center p-3 bg-white hover:shadow-md transition-shadow cursor-pointer border-b border-gray-200"
+          @click="handleShowDetails(service)"
         >
-          {{ t('end_of_list') || 'No more services to load' }}
+          <!-- Service Icon -->
+          <div class="bg-gray-100 rounded-lg flex items-center justify-center mr-3 w-12 h-12">
+            <img
+              v-if="service.iconUrl"
+              :src="service.iconUrl"
+              :alt="service.name"
+              class="w-8 h-8 object-contain"
+            />
+            <div
+              v-else
+              class="bg-gray-300 rounded flex items-center justify-center text-gray-600 w-8 h-8 text-sm"
+            >
+              {{ service.name.charAt(0) }}
+            </div>
+          </div>
+
+          <!-- Service Info -->
+          <div class="flex-1 min-w-0">
+            <h3 class="font-medium text-gray-900 truncate">{{ service.name }}</h3>
+            <p
+              v-if="service.description"
+              class="text-sm text-gray-500 truncate"
+            >
+              {{ service.description.ko || service.description.en }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
