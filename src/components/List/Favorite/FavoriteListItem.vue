@@ -2,6 +2,7 @@
   import { useI18n } from 'vue-i18n'
   import type { ServiceListItem } from '@/types/service'
   import { BookmarkIcon, ExternalLinkIcon } from '@/components/Icon'
+  import { FallbackImage } from '@/components/Common'
 
   const { t } = useI18n()
 
@@ -21,7 +22,7 @@
   <div class="flex items-center p-3 bg-white hover:shadow-md transition-shadow">
     <!-- Service Icon -->
     <div class="bg-gray-100 rounded-lg flex items-center justify-center mr-3 w-10 h-10">
-      <img
+      <FallbackImage
         v-if="service.iconUrl"
         :src="service.iconUrl"
         :alt="service.name"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import type { ServiceListItem } from '@/types/service'
+  import { FallbackImage } from '@/components/Common'
 
   interface Props {
     service: ServiceListItem
@@ -19,7 +20,7 @@
   >
     <!-- Service Icon -->
     <div class="bg-gray-100 rounded-lg flex items-center justify-center mr-3 w-12 h-12">
-      <img
+      <FallbackImage
         v-if="service.iconUrl"
         :src="service.iconUrl"
         :alt="service.name"
