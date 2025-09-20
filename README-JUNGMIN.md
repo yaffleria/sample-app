@@ -13,7 +13,11 @@
 
 ## 개발 환경 구동
 
-- pnpm dev
+- pnpm local
+- create .env.local file and write below
+  - VITE_APP_ENV=local
+  - VITE_API_BASE_URL=
+- develop, stage, main 브랜치는 동일 형상으로 맞춰둠
 
 ## Tech Stack
 
@@ -43,7 +47,7 @@
 - 개발환경 구성과 요구사항 이해를 위해 Grok, Gemini CLI 를 사용
   - 프롬프트는 짧은 문답형으로, Carousl 사용에 가장 널리 사용되는 라이브러리나 모듈은?
   - 구성된 프로젝트 구조에 대해, 문제가 있는 부분이 존재하는지, 구조적으로 합리적인지?
-- 코딩에서는 vscode, copilot(agent: claude sonnet 4)을 사용함(docs 폴더 내 요구사항 보존, 실제 업무할때는 다른 방식의 prompt 문서를 적거나, 연동을 할 것 같음)
+- 코딩에서는 vscode, copilot(agent: claude sonnet 4)을 사용함(실제 업무할때는 다른 방식의 prompt 문서를 적거나, 연동을 할 것 같음)
   - Copilot과의 함께하는 코딩은 명확한 지시 후, 코드 리뷰를 반복함, 주로 영어를 사용하며 한글은 답이 만족스럽지 못한 경우가 많아 잘 사용하지 않음. 템플릿과 스타일은 전적으로 맡겼음.
     - 배너 지시 사항 사례
       - components/Carousel 폴더 아래 CarouselContainer.vue 생성, bannerData 참조하여 locale에 맞도록 슬라이드 표시
