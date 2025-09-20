@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed, ref, watch, nextTick } from 'vue'
+  import { computed, ref, watch, nextTick, onMounted, onUnmounted } from 'vue'
   import { RecycleScroller } from 'vue-virtual-scroller'
   import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
   import ServiceListItem from './ServiceListItem.vue'
@@ -46,10 +46,48 @@
     }
   }
 
+  // Add additional scroll handling for more reliable infinite scroll
+  const handleScroll = (event: Event) => {
+    const target = event.target as HTMLElement
+    const scrollTop = target.scrollTop
+    const scrollHeight = target.scrollHeight
+    const clientHeight = target.clientHeight
+    const scrollBottom = scrollTop + clientHeight
+
+    // Trigger fetch when near bottom (within 100px)
+    if (scrollHeight - scrollBottom < 100) {
+      handleScrollEnd()
+    }
+  }
+
+  // Fallback scroll detection using window scroll for page-mode
+  const handleWindowScroll = () => {
+    if (props.hasNextPage && !props.isLoadingMore) {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+
+      // Trigger when within 200px of bottom
+      if (scrollTop + windowHeight >= documentHeight - 200) {
+        console.log('Window scroll triggered fetch more')
+        handleScrollEnd()
+      }
+    }
+  }
+
   // Handle item click
   const handleShowDetails = (service: ServiceListItemType) => {
     emit('showDetails', service)
   }
+
+  // Setup window scroll listener as fallback
+  onMounted(() => {
+    window.addEventListener('scroll', handleWindowScroll, { passive: true })
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener('scroll', handleWindowScroll)
+  })
 
   // Watch for service changes and update scroller
   watch(
@@ -58,6 +96,19 @@
       if (virtualScroller.value) {
         await nextTick()
         // Force refresh of visible items when data changes
+        virtualScroller.value.$forceUpdate()
+      }
+    },
+    { flush: 'post' }
+  )
+
+  // Watch for layout changes that might affect scroll detection
+  watch(
+    [() => props.hasNextPage, () => props.isLoadingMore],
+    async () => {
+      if (virtualScroller.value) {
+        await nextTick()
+        // Refresh the scroller to ensure scroll events work properly
         virtualScroller.value.$forceUpdate()
       }
     },
@@ -92,6 +143,7 @@
         direction="vertical"
         page-mode
         @scroll-end="handleScrollEnd"
+        @scroll="handleScroll"
         v-slot="{ item }"
       >
         <!-- Regular Service Item -->
