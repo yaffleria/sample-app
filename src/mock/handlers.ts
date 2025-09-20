@@ -7,9 +7,29 @@ export const handlers = [
     await new Promise((resolve) => setTimeout(resolve, 3000))
     return HttpResponse.json(mockBanners)
   }),
-  http.get('/api/services', async () => {
+  http.get('/api/services', async ({ request }) => {
+    const url = new URL(request.url)
+    const page = parseInt(url.searchParams.get('page') || '1')
+    const limit = parseInt(url.searchParams.get('limit') || '3')
+
+    // Add 3 second delay to test loading states
     await new Promise((resolve) => setTimeout(resolve, 3000))
-    return HttpResponse.json(mockServices)
+
+    const startIndex = (page - 1) * limit
+    const endIndex = startIndex + limit
+    const services = mockServices.slice(startIndex, endIndex)
+
+    return HttpResponse.json({
+      data: services,
+      pagination: {
+        page,
+        limit,
+        total: mockServices.length,
+        totalPages: Math.ceil(mockServices.length / limit),
+        hasNextPage: endIndex < mockServices.length,
+        hasPreviousPage: page > 1,
+      },
+    })
   }),
   http.get('/*', () => {
     return
