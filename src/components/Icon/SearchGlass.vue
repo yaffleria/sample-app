@@ -16,15 +16,15 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
-  className?: string
-}
+  interface Props {
+    className?: string
+  }
 
-withDefaults(defineProps<Props>(), {
-  className: 'h-5 w-5',
-})
+  withDefaults(defineProps<Props>(), {
+    className: 'h-5 w-5',
+  })
 </script>
 
 <style scoped>
-/* SearchIcon component */
+  /* SearchIcon component */
 </style>
