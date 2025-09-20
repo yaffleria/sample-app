@@ -10,5 +10,7 @@
   "no_favorites": "No favorite services yet",
   "search_services_placeholder": "Search services...",
   "no_search_results": "No services found",
-  "try_different_keywords": "Try different keywords"
+  "try_different_keywords": "Try different keywords",
+  "search_error": "Search failed",
+  "try_again_later": "Please try again later"
 }
