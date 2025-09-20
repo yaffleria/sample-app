@@ -5,6 +5,7 @@ import type { LocalizedText } from '@/types/discovery'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    { path: '/', redirect: '/en/discovery' },
     { path: '/:lang(en|ko)/discovery', name: 'discovery', component: () => import('../views/DiscoveryView.vue') },
   ],
 })
