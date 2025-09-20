@@ -5,5 +5,10 @@
   "dapp_list_title": "목록",
   "go_to_dapp": "서비스 바로가기",
   "button_cancel": "취소",
-  "button_confirm": "확인"
+  "button_confirm": "확인",
+  "end_of_list": "더 이상 불러올 서비스가 없습니다",
+  "no_favorites": "아직 즐겨찾기한 서비스가 없습니다",
+  "search_services_placeholder": "서비스 검색...",
+  "no_search_results": "검색 결과가 없습니다",
+  "try_different_keywords": "다른 키워드로 시도해보세요"
 }
