@@ -2,26 +2,19 @@
   <div
     v-if="isVisible && service"
     class="fixed inset-0 z-50 flex items-end justify-center"
+    :style="{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }"
     @click="handleBackdropClick"
     @touchmove.prevent
     @wheel.prevent
   >
-    <!-- Background overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-10 backdrop-blur-sm"></div>
-
     <!-- Bottom sheet -->
     <div
       class="relative bg-white rounded-t-2xl shadow-2xl w-full max-w-md mx-4 mb-0"
-      style="height: 40vh; min-height: 300px"
+      style="height: 55vh; min-height: 300px"
       @click.stop
     >
-      <!-- Handle bar -->
-      <div class="flex justify-center pt-3 pb-2">
-        <div class="w-12 h-1 bg-gray-300 rounded-full"></div>
-      </div>
-
       <!-- Content -->
-      <div class="px-6 pb-6 h-full flex flex-col">
+      <div class="px-8 mt-6 pb-6 h-full flex flex-col">
         <!-- First row: Icon and Name/Network -->
         <div class="flex items-center space-x-4 mb-4">
           <!-- Service Icon -->
@@ -29,7 +22,7 @@
             <FallbackImage
               :src="service.iconUrl"
               :alt="service.name"
-              class="w-16 h-16 rounded-lg"
+              class="w-14 h-14 rounded-lg"
             />
           </div>
 
@@ -67,10 +60,10 @@
         </div>
 
         <!-- Go button -->
-        <div class="pt-4 border-t border-gray-100">
+        <div class="pt-4 mb-4 flex justify-center">
           <button
             @click="handleGoClick"
-            class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200"
+            class="w-[70%] bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-full transition-colors duration-200"
           >
             Go
           </button>
