@@ -8,6 +8,7 @@
   import ListHeader from '../ListHeader.vue'
   import { useAlert } from '@/composables/useAlert'
   import { useBottomSheet } from '@/composables/useBottomSheet'
+  import { filterSupportedServices } from '@/utils'
   import type { ServiceListItem } from '@/types/service'
   import type { AxiosResponse } from 'axios'
 
@@ -27,7 +28,11 @@
     queryFn: () => getFavoriteList(),
   })
 
-  const favoriteServices = computed(() => favoritesResponse.value?.data || [])
+  // 즐겨찾기 서비스도 지원되는 서비스만 필터링
+  const favoriteServices = computed(() => {
+    const rawFavorites = favoritesResponse.value?.data || []
+    return filterSupportedServices(rawFavorites)
+  })
   const favoriteCount = computed(() => favoriteServices.value.length)
 
   const removeFromFavoritesArray = (serviceId: string) => {
