@@ -85,10 +85,12 @@
         :items="virtualItems"
         :item-size="72"
         key-field="virtualId"
-        :buffer="50"
-        :prerender="5"
+        :buffer="200"
+        :prerender="10"
+        :pool-size="20"
         :emit-update="true"
         direction="vertical"
+        page-mode
         @scroll-end="handleScrollEnd"
         v-slot="{ item }"
       >
