@@ -6,12 +6,17 @@
     @click="handleBackdropClick"
     @touchmove.prevent
     @wheel.prevent
+    role="dialog"
+    aria-modal="true"
+    :aria-labelledby="`bottomsheet-title-${service.name}`"
+    :aria-describedby="`bottomsheet-description-${service.name}`"
   >
     <!-- Bottom sheet -->
     <div
       class="relative bg-white rounded-t-2xl shadow-2xl w-full mb-0"
       style="height: 55vh; min-height: 300px"
       @click.stop
+      role="document"
     >
       <!-- Content -->
       <div class="px-8 mt-6 pb-6 h-full flex flex-col">
@@ -21,19 +26,23 @@
           <div class="flex-shrink-0">
             <FallbackImage
               :src="service.iconUrl"
-              :alt="service.name"
+              :alt="`${service.name} icon`"
               class="w-14 h-14 rounded-lg"
             />
           </div>
 
           <!-- Name and Network -->
           <div class="flex-1 min-w-0">
-            <h3 class="text-lg font-semibold text-gray-900 truncate">
+            <h3
+              :id="`bottomsheet-title-${service.name}`"
+              class="text-lg font-semibold text-gray-900 truncate"
+            >
               {{ service.name }}
             </h3>
             <p
               v-if="service.supportNetwork?.length"
               class="text-sm text-gray-500 truncate"
+              :aria-label="`Supported networks: ${service.supportNetwork.join(', ')}`"
             >
               {{ service.supportNetwork.join(', ') }}
             </p>
@@ -45,7 +54,10 @@
           v-if="service.serviceUrl"
           class="mb-4"
         >
-          <p class="text-sm text-gray-700 break-all">
+          <p
+            class="text-sm text-gray-700 break-all"
+            aria-label="Service URL"
+          >
             {{ service.serviceUrl }}
           </p>
         </div>
@@ -57,7 +69,10 @@
 
         <!-- Fourth row: Localized description -->
         <div class="flex-1 mb-6 overflow-y-auto">
-          <p class="text-sm text-gray-500 leading-relaxed">
+          <p
+            :id="`bottomsheet-description-${service.name}`"
+            class="text-sm text-gray-500 leading-relaxed"
+          >
             {{ localizedDescription }}
           </p>
         </div>
@@ -66,7 +81,9 @@
         <div class="pt-4 mb-4 flex justify-center">
           <button
             @click="handleGoClick"
-            class="w-[70%] bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-full transition-colors duration-200"
+            class="w-[70%] bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            type="button"
+            :aria-label="`Go to ${service.name} service`"
           >
             Go
           </button>

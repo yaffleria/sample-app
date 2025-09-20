@@ -71,13 +71,18 @@
   <!-- 메인 컨테이너: 100dvh로 전체 높이, 모바일 퍼스트 -->
   <div class="min-h-[100dvh] bg-gray-50 flex flex-col items-center">
     <!-- 상단 배너 섹션 -->
-    <section class="w-full mb-6">
+    <section
+      class="w-full mb-6"
+      aria-label="Banner section"
+    >
       <!-- Show skeleton while loading -->
       <CarouselSkeleton v-if="isLoadingBannerList" />
       <!-- Show error message if loading failed -->
       <div
         v-else-if="isErrorBannerList"
         class="w-full aspect-[16/9] bg-red-50 border border-red-200 rounded-lg flex items-center justify-center"
+        role="alert"
+        aria-live="polite"
       >
         <p class="text-red-600">{{ error?.message || 'Failed to load banners' }}</p>
       </div>
@@ -91,12 +96,18 @@
     <!-- 콘텐츠 영역: 즐겨찾기와 서비스 리스트 -->
     <div class="w-full max-w-7xl mx-auto px-4 flex flex-col lg:flex-row gap-6 flex-1 pb-6">
       <!-- 즐겨찾기 리스트 섹션 -->
-      <section class="w-full lg:w-1/3 min-w-0">
+      <section
+        class="w-full lg:w-1/3 min-w-0"
+        aria-label="Favorites"
+      >
         <FavoriteListContainer />
       </section>
 
       <!-- 서비스 리스트 섹션 -->
-      <section class="w-full lg:w-2/3 min-w-0">
+      <section
+        class="w-full lg:w-2/3 min-w-0"
+        aria-label="Services"
+      >
         <ServiceListContainer
           :services="allServices"
           :has-next-page="hasNextPage"

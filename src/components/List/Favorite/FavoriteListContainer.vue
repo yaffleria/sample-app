@@ -80,7 +80,10 @@
 </script>
 
 <template>
-  <div class="bg-white">
+  <section
+    class="bg-white"
+    aria-labelledby="favorite-list-title"
+  >
     <!-- Header -->
     <ListHeader
       :title="t('dapp_favorite_title')"
@@ -93,6 +96,8 @@
       <div
         v-if="isLoadingFavorites"
         class="space-y-3"
+        role="status"
+        aria-label="Loading favorites"
       >
         <FavoriteListSkeleton
           v-for="n in 3"
@@ -104,6 +109,8 @@
       <div
         v-else-if="isErrorFavorites"
         class="text-center py-8 text-red-500 text-sm"
+        role="alert"
+        aria-live="polite"
       >
         {{ favoritesError?.message || 'Failed to load favorites' }}
       </div>
@@ -113,23 +120,31 @@
         v-else
         class="space-y-3"
       >
-        <FavoriteListItem
-          v-for="service in favoriteServices"
-          :key="service.name"
-          :service="service"
-          @remove-from-favorites="handleRemoveFromFavorites"
-          @open-service="handleOpenService"
-          @show-details="handleShowDetails"
-        />
+        <ul
+          role="list"
+          aria-label="Favorite services"
+          class="space-y-3"
+        >
+          <FavoriteListItem
+            v-for="service in favoriteServices"
+            :key="service.name"
+            :service="service"
+            @remove-from-favorites="handleRemoveFromFavorites"
+            @open-service="handleOpenService"
+            @show-details="handleShowDetails"
+          />
+        </ul>
 
         <!-- Empty state message -->
         <div
           v-if="favoriteServices.length === 0"
           class="text-center py-8 text-gray-500 text-sm"
+          role="status"
+          aria-live="polite"
         >
           {{ t('no_favorites') }}
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>

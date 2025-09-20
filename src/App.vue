@@ -1,5 +1,11 @@
 <template>
-  <RouterView />
+  <main
+    id="main-content"
+    role="main"
+    tabindex="-1"
+  >
+    <RouterView />
+  </main>
   <AlertProvider />
   <BottomSheetProvider />
 </template>

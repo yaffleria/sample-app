@@ -7,12 +7,16 @@
     class?: string
     fill?: string
     stroke?: string
+    ariaLabel?: string
+    ariaHidden?: boolean
   }
 
   withDefaults(defineProps<Props>(), {
     class: 'w-5 h-5',
     fill: 'currentColor',
     stroke: 'currentColor',
+    ariaLabel: 'Bookmark',
+    ariaHidden: false,
   })
 </script>
 
@@ -22,6 +26,10 @@
     :fill="fill"
     :stroke="stroke"
     viewBox="0 0 24 24"
+    :aria-label="ariaHidden ? undefined : ariaLabel"
+    :aria-hidden="ariaHidden"
+    role="img"
+    focusable="false"
   >
     <path
       stroke-linecap="round"

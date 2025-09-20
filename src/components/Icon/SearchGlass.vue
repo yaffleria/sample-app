@@ -5,6 +5,10 @@
     stroke="currentColor"
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
+    :aria-label="ariaHidden ? undefined : ariaLabel"
+    :aria-hidden="ariaHidden"
+    role="img"
+    focusable="false"
   >
     <path
       stroke-linecap="round"
@@ -18,10 +22,14 @@
 <script setup lang="ts">
   interface Props {
     className?: string
+    ariaLabel?: string
+    ariaHidden?: boolean
   }
 
   withDefaults(defineProps<Props>(), {
     className: 'h-5 w-5',
+    ariaLabel: 'Search',
+    ariaHidden: true,
   })
 </script>
 

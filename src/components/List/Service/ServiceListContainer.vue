@@ -57,7 +57,10 @@
 </script>
 
 <template>
-  <div class="bg-white flex-1 flex flex-col">
+  <section
+    class="bg-white flex-1 flex flex-col"
+    aria-labelledby="service-list-title"
+  >
     <!-- Header -->
     <ListHeader
       :title="t('dapp_list_title')"
@@ -73,6 +76,7 @@
           :placeholder="t('search_services_placeholder')"
           @search="handleSearch"
           @clear="handleClearSearch"
+          aria-label="Search services"
         />
       </div>
 
@@ -86,6 +90,8 @@
         :is-loading-services="props.isLoadingServices"
         @show-details="handleShowDetails"
         class="flex-1 min-h-0"
+        role="list"
+        aria-label="Service list"
       />
 
       <!-- Regular List (when searching) -->
@@ -95,7 +101,9 @@
         :search-query="searchQuery"
         @show-details="handleShowDetails"
         class="flex-1 min-h-0"
+        role="list"
+        :aria-label="`Search results for '${searchQuery}' - ${filteredServices.length} services found`"
       />
     </div>
-  </div>
+  </section>
 </template>
