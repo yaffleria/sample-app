@@ -4,10 +4,11 @@ import { mockBanners, mockServices } from '@/mock/data'
 export const handlers = [
   http.get('/api/banners', async () => {
     // Add 5 second delay to test loading states
-    await new Promise((resolve) => setTimeout(resolve, 5000))
+    await new Promise((resolve) => setTimeout(resolve, 3000))
     return HttpResponse.json(mockBanners)
   }),
   http.get('/api/services', async () => {
+    await new Promise((resolve) => setTimeout(resolve, 3000))
     return HttpResponse.json(mockServices)
   }),
   http.get('/*', () => {
