@@ -12,5 +12,4 @@ export interface ServiceListItem {
   supportedLang?: LocalizedText[]
   supportEnv?: SupportedEnv[]
   supportedDevice?: SupportedDevice[]
-  isFavorite: boolean
 }
