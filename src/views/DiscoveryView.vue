@@ -3,11 +3,12 @@
   import { useQuery } from '@tanstack/vue-query'
   import getBannerList from '@/api/helper/getBannerList'
   import { computed } from 'vue'
-  import type { LocalizedText, Banner } from '@/types/discovery'
+  import type { Banner } from '@/types/discovery'
   import type { AxiosResponse } from 'axios'
+  import CarouselContainer from '@/components/Carousel/CarouselContainer.vue'
+  import CarouselSkeleton from '@/components/Carousel/CarouselSkeleton.vue'
 
-  const { t, locale } = useI18n()
-  const currentLocale = computed(() => locale.value as LocalizedText)
+  const { t } = useI18n()
 
   const {
     isLoading: isLoadingBannerList,
@@ -19,38 +20,37 @@
     queryFn: () => getBannerList(),
   })
 
-  const banners = computed(() => bannerResponse.value?.data)
+  const bannerData = computed(() => bannerResponse.value?.data || [])
 </script>
 <template>
   <!-- 메인 컨테이너: 100dvh로 전체 높이, 모바일 퍼스트 -->
   <div class="min-h-[100dvh] bg-gray-50 flex flex-col items-center">
     <!-- 상단 배너 섹션 -->
     <section class="w-full mb-6">
-      <div v-if="isLoadingBannerList">Loading banners...</div>
-      <div v-else-if="isErrorBannerList">An error occurred: {{ error?.message }}</div>
-      <div v-else-if="banners">
-        <div
-          v-for="banner in banners"
-          :key="banner.name"
-        >
-          <a :href="banner.ctaLinkUrl[currentLocale]">
-            <img
-              :src="banner.imageUrl[currentLocale]"
-              :alt="banner.description[currentLocale]"
-            />
-          </a>
-        </div>
+      <!-- Show skeleton while loading -->
+      <CarouselSkeleton v-if="isLoadingBannerList" />
+      <!-- Show error message if loading failed -->
+      <div
+        v-else-if="isErrorBannerList"
+        class="w-full aspect-[16/9] bg-red-50 border border-red-200 rounded-lg flex items-center justify-center"
+      >
+        <p class="text-red-600">{{ error?.message || 'Failed to load banners' }}</p>
       </div>
+      <!-- Show carousel when data is loaded -->
+      <CarouselContainer
+        v-else
+        :banners="bannerData"
+      />
     </section>
 
     <!-- 즐겨찾기 리스트 섹션 -->
     <section class="w-full mb-6 bg-white rounded-lg shadow-sm">
-      {{ t('favorites') }}
+      {{ t('dapp_favorite_title') }}
     </section>
 
     <!-- 서비스 리스트 섹션 -->
     <section class="w-full flex-1 bg-white rounded-lg shadow-sm overflow-hidden">
-      {{ t('services') }}
+      {{ t('go_to_dapp') }}
     </section>
   </div>
 </template>

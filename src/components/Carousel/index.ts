@@ -1,0 +1,7 @@
+export { default as CarouselContainer } from './CarouselContainer.vue'
+export { default as CarouselSkeleton } from './CarouselSkeleton.vue'
+export { default as CarouselSlide } from './CarouselSlide.vue'
+export { default as CarouselImage } from './CarouselImage.vue'
+export { default as CarouselButton } from './CarouselButton.vue'
+export { default as CarouselSlideIndex } from './CarouselSlideIndex.vue'
+export { default as CarouselDescription } from './CarouselDescription.vue'
