@@ -20,7 +20,7 @@
   })
 
   defineEmits<{
-    removeFromFavorites: [serviceName: string]
+    removeFromFavorites: [serviceId: string]
     openService: [service: ServiceListItem]
   }>()
 </script>
@@ -58,7 +58,7 @@
     <div class="flex items-center space-x-2">
       <!-- Remove from Favorites Button -->
       <button
-        @click="$emit('removeFromFavorites', service.name)"
+        @click="$emit('removeFromFavorites', service.id)"
         class="p-2 rounded-lg transition-colors text-red-600 hover:bg-red-50 flex flex-col items-center"
         :title="t('dapp_favorite_delete')"
       >
