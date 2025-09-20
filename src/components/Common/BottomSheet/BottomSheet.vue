@@ -41,7 +41,10 @@
         </div>
 
         <!-- Second row: Service URL -->
-        <div class="mb-4">
+        <div
+          v-if="service.serviceUrl"
+          class="mb-4"
+        >
           <p class="text-sm text-gray-700 break-all">
             {{ service.serviceUrl }}
           </p>
