@@ -2,7 +2,7 @@
   import { computed } from 'vue'
   import { useI18n } from 'vue-i18n'
   import type { ServiceListItem } from '@/types/service'
-  import { FallbackImage } from '@/components/Common'
+  import { FallbackImage } from '@/components/List'
 
   const { locale } = useI18n()
 

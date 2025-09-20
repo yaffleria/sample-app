@@ -3,7 +3,7 @@
   import { useI18n } from 'vue-i18n'
   import type { ServiceListItem } from '@/types/service'
   import { BookmarkIcon } from '@/components/Icon'
-  import { FallbackImage } from '@/components/Common'
+  import { FallbackImage } from '@/components/List'
 
   const { t, locale } = useI18n()
 
