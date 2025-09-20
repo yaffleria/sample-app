@@ -5,7 +5,7 @@
     @click="handleBackdropClick"
   >
     <!-- Background overlay with shadow -->
-    <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
+    <div class="absolute inset-0 bg-opacity-10 backdrop-blur-sm"></div>
 
     <!-- Alert window -->
     <div

@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-  import { AlertWindow } from '@/components/Common'
+  import AlertWindow from './AlertWindow.vue'
   import { useAlert } from '@/composables/useAlert'
 
   const { alertState, confirmAlert, cancelAlert, hideAlert } = useAlert()
