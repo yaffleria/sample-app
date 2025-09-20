@@ -22,6 +22,7 @@
   - 영역 데이터가 준비되지 않은 경우 레이아웃 쉬프트 방지를 위해 스켈레톤 이미지 제공
   - 버튼이 존재하지 않는 경우 이미지 클릭 시 링크 이동하도록 설정
 - 다국어는 useI18n composable을 전역에서 참조하여, 필요 영역에서 올바르게 표시할 수 있도록 사용
+- 즐겨찾기와 서비스 영역은 구현 간에는 하나의 배열을 사용한다 가정하였으나, API 서버와의 GET/POST/PUT 통신기반으로 구현도 가능하다 생각한다.(즐겨찾기용 API, 서비스목록용 API, 추가/삭제 API)
 
 ## AI 도구
 
@@ -34,6 +35,9 @@
       - components/Carousel 폴더 아래 CarouselContainer.vue 생성, bannerData 참조하여 locale에 맞도록 슬라이드 표시
       - 로딩 중 layout shift 를 방지 하기 위한 CarouselSkeleton.vue 컴포넌트 생성 및 적용
       - CarouselButton, Description, Image, SlideIndex 를 각각 파일별로 분리 생성을 지시하며 컴포넌트를 작은 단위로 생성함
+    - 리스트 영역 지시 사항 사례
+      - 즐겨찾기와 서비스 영역은 하나의 데이터셋을 사용하는 것으로 간주하여, 2개의 컨테이너 컴포넌트인 FavoriteList, ServiceList 생성
+      - 데이터는
   - 테스트 코드는 100% 위임
 
 ## 주절주절
