@@ -89,6 +89,31 @@ export function filterSupportedServices(services: ServiceListItem[]): ServiceLis
 }
 
 /**
+ * 검색어로 서비스 필터링
+ */
+export function filterServicesBySearch(services: ServiceListItem[], query: string): ServiceListItem[] {
+  if (!query.trim()) return services
+
+  const lowercaseQuery = query.toLowerCase()
+  return services.filter((service) => {
+    // Search in service name
+    if (service.name.toLowerCase().includes(lowercaseQuery)) return true
+
+    // Search in service description
+    if (service.description?.ko?.toLowerCase().includes(lowercaseQuery)) return true
+    if (service.description?.en?.toLowerCase().includes(lowercaseQuery)) return true
+
+    // Search in service URL
+    if (service.serviceUrl.toLowerCase().includes(lowercaseQuery)) return true
+
+    // Search in supported networks
+    if (service.supportNetwork?.some((network) => network.toLowerCase().includes(lowercaseQuery))) return true
+
+    return false
+  })
+}
+
+/**
  * 디버깅용 함수 - 현재 환경 정보 출력
  */
 export function debugEnvironment() {
