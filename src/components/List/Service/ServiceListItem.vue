@@ -19,14 +19,14 @@
   })
 
   defineEmits<{
-    click: [service: ServiceListItem]
+    showDetails: [service: ServiceListItem]
   }>()
 </script>
 
 <template>
   <div
     class="flex items-center p-3 bg-white hover:shadow-md transition-shadow cursor-pointer"
-    @click="$emit('click', service)"
+    @click="$emit('showDetails', service)"
   >
     <!-- Service Icon -->
     <div class="bg-gray-100 rounded-lg flex items-center justify-center mr-3 w-12 h-12">

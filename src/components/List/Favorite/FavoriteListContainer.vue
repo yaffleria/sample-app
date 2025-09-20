@@ -7,11 +7,13 @@
   import FavoriteListSkeleton from './FavoriteListSkeleton.vue'
   import ListHeader from '../ListHeader.vue'
   import { useAlert } from '@/composables/useAlert'
+  import { useBottomSheet } from '@/composables/useBottomSheet'
   import type { ServiceListItem } from '@/types/service'
   import type { AxiosResponse } from 'axios'
 
   const { t } = useI18n()
   const { showAlert } = useAlert()
+  const { showBottomSheet } = useBottomSheet()
   const queryClient = useQueryClient()
 
   // React Query로 즐겨찾기 데이터 가져오기
@@ -61,6 +63,15 @@
   const handleOpenService = (service: ServiceListItem) => {
     window.open(service.serviceUrl, '_blank', 'noopener,noreferrer')
   }
+
+  const handleShowDetails = (service: ServiceListItem) => {
+    showBottomSheet({
+      service,
+      onClose: () => {
+        console.log('BottomSheet closed for:', service.name)
+      },
+    })
+  }
 </script>
 
 <template>
@@ -103,6 +114,7 @@
           :service="service"
           @remove-from-favorites="handleRemoveFromFavorites"
           @open-service="handleOpenService"
+          @show-details="handleShowDetails"
         />
 
         <!-- Empty state message -->

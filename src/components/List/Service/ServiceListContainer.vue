@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { useI18n } from 'vue-i18n'
   import { useInfiniteScroll } from '@/utils'
+  import { useBottomSheet } from '@/composables/useBottomSheet'
   import ServiceListItem from './ServiceListItem.vue'
   import ServiceListSkeleton from './ServiceListSkeleton.vue'
   import ListHeader from '../ListHeader.vue'
@@ -23,10 +24,15 @@
   })
 
   const { t } = useI18n()
+  const { showBottomSheet } = useBottomSheet()
 
-  const handleServiceClick = (service: ServiceListItemType) => {
-    // This will be used for future functionality (infinite scroll trigger, etc.)
-    console.log('Service clicked:', service.name)
+  const handleShowDetails = (service: ServiceListItemType) => {
+    showBottomSheet({
+      service,
+      onClose: () => {
+        console.log('BottomSheet closed for:', service.name)
+      },
+    })
   }
 
   // Set up infinite scroll
@@ -70,7 +76,7 @@
           v-for="service in services"
           :key="service.name"
           :service="service"
-          @click="handleServiceClick"
+          @show-details="handleShowDetails"
         />
 
         <!-- Loading More Skeleton -->
